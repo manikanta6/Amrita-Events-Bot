@@ -180,7 +180,7 @@ app.get('/publish',function(err,docs){
     for (var i = 0; i < docs.length; i++) {
         
 
-        db.subscribed.find({person:"identitiy"},function(err,docs2){
+        db.subscribed.find({person:"identity"},function(err,docs2){
             if(err)
         {
             console.log(err);
