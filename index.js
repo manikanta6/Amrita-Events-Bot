@@ -201,13 +201,13 @@ app.get('/publish',function(err,docs){
 
         var n2=docs2.length;
         
-        h=h+1;
+       
 
             for(j=0;j<docs2.length;j++)
 {
 
 
-            
+             h=h+1;
          if(docs2[j].cname==store)
          {
 var id=docs2[j].id;
