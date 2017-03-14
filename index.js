@@ -189,7 +189,7 @@ app.get('/publish',function(err,docs){
             var j;
             for(j=0;i<docs2.length;j++)
 
-            
+            {
          if(docs2[j].cname==docs[i].club)
          {
     //request("https:www.gupshup.io/developer/bot/botname/public?key=1325698540829049 & message="+ name +" is conducing in"+hall +"on"+date +"about"+des
@@ -210,6 +210,7 @@ app.get('/publish',function(err,docs){
               }
                
             }
+        }
         });
     }
    });
