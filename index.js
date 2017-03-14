@@ -171,9 +171,8 @@ app.get('/insertid',function(req,res){
 
 });
 
-app.get('/publish',function(err,docs){
-    var h=0;
-    var g=0;
+app.get('/publish',function(req,res){
+    
 
         var d=dateFormat("yyyy-mm-dd");
 
@@ -188,7 +187,7 @@ var n1=docs.length;
 
        
         
-        g=g+1;
+        
         
 
         db.subscribed.find({$and:[{person:"identity",cname:store}]},function(err,docs2){
@@ -208,7 +207,7 @@ var n1=docs.length;
 {
 
 
-             h=h+1;
+            
       
 var id=docs2[j].id;
 
@@ -221,14 +220,7 @@ var id=docs2[j].id;
                         {
                             console.log("err");
                         }
-                        else{
-                        
-                        if(g==n1&&h==n2)
-                        {
-
-                          res.sendFile(__dirname +'/public/success2.html');
-                      }
-                }
+                   
                         });
 
               
@@ -237,11 +229,11 @@ var id=docs2[j].id;
      }
         });
     }
+        
    });
+    res.sendFile(__dirname +'/public/success2.html');
 
 })
-
-
 
 
 
