@@ -209,7 +209,7 @@ var id=docs2[j].id;
                         }
                         else{
                         
-                          console.log("success");
+                          res.sendFile(__dirname +'/public/success2.html');
                 }
                         });
 
