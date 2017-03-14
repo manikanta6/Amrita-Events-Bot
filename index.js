@@ -147,12 +147,12 @@ app.get('/insertid',function(req,res){
     var cname=req.query.cname;
 
 
-   db.subscribed.find({$and:[{id:id},{cname:cname}]},function(err,docs)
+   db.subscribed.find({$and:[{id:id,cname:cname}]},function(err,docs)
    {
     if (docs.length=="0")
 
     {
-       db.subscribed.insert({person:person,id:id,cname:cname},function(err,docs)
+       db.subscribed.insert({person:person,id:id,cname:cname},function(err,docs2)
     {
         if(err)
         {
