@@ -179,18 +179,19 @@ app.get('/publish',function(err,docs){
 
    db.event.find({date:d},function(err,docs){
 
-    for (var i=0; i<docs.length; i++) {
+var n1=docs.length;
+    for (var i=0; i<n1; i++) {
       var store=docs[i].club;
        var club=docs[i].club;
        var hall=docs[i].hall;
         var des=docs[i].descrip;
 
-        var n1=docs.length;
+       
         
         g=g+1;
         
 
-        db.subscribed.find({person:"identity"},function(err,docs2){
+        db.subscribed.find({$and:[{person:"identity",cname:store}]},function(err,docs2){
             if(err)
         {
             console.log(err);
@@ -203,20 +204,19 @@ app.get('/publish',function(err,docs){
         
        
 
-            for(j=0;j<docs2.length;j++)
+            for(j=0;j<n2;j++)
 {
 
 
              h=h+1;
-         if(docs2[j].cname==store)
-         {
+      
 var id=docs2[j].id;
 
         request("https://www.gupshup.io/developer/bot/amritaevents/public?key="+id+"&message="+ club +" is conducing in "+hall +" today about"+des
 
 
 
-                      , function(error, response, body) {
+                      , function(error) {
                         if(error)
                         {
                             console.log("err");
@@ -231,7 +231,7 @@ var id=docs2[j].id;
                 }
                         });
 
-              }
+              
                
             }
      }
