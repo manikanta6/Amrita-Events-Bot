@@ -171,13 +171,17 @@ app.get('/insertid',function(req,res){
 
 });
 
-
 app.get('/publish',function(err,docs){
 
         var d=dateFormat("yyyy-mm-dd");
 
    db.event.find({date:d},function(err,docs){
-    for (var i = 0; i < docs.length; i++) {
+
+    for (var i=0; i<docs.length; i++) {
+      var store=docs[i].club;
+       var club=docs[i].club;
+       var hall=docs[i].hall;
+        var des=docs[i].descrip;
         
 
         db.subscribed.find({person:"identity"},function(err,docs2){
@@ -187,15 +191,15 @@ app.get('/publish',function(err,docs){
         }else
         { 
             var j;
-            for(j=0;i<docs2.length;j++)
-
-            {
-         if(docs2[j].cname==docs[i].club)
+            for(j=0;j<docs2.length;j++)
+{
+            
+         if(docs2[j].cname==store)
          {
-    //request("https:www.gupshup.io/developer/bot/botname/public?key=1325698540829049 & message="+ name +" is conducing in"+hall +"on"+date +"about"+des
-    //request("https://www.gupshup.io/developer/bot/amritaevents/public?key=1260002900719641&message=am chastunav ra"
+var id=docs2[j].id;
 
-        request("https://www.gupshup.io/developer/bot/amritaevents/public?key="+docs2[j].id+"&message="+ docs[i].club +" is conducing in "+docs[i].hall +" today about"+docs[i].descrip
+        request("https://www.gupshup.io/developer/bot/amritaevents/public?key="+id+"&message="+ club +" is conducing in "+hall +" today about"+des
+
 
 
                       , function(error, response, body) {
@@ -203,19 +207,22 @@ app.get('/publish',function(err,docs){
                         {
                             console.log("err");
                         }
+                        else{
                         
-                          console.log(response);
+                          console.log("success");
+                }
                         });
 
               }
                
             }
-        }
+     }
         });
     }
    });
 
-});
+})
+
 
 
 
@@ -225,11 +232,8 @@ app.get('/publish',function(err,docs){
 app.listen(port,function(){
     console.log("app is listening");
 
-})
+});
 
-
-   //   fetch = +refs/heads/*:refs/remotes/heroku/*
-    //fetch = +refs/heads/*:refs/remotes/origin/*
 
 
 
