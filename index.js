@@ -92,31 +92,26 @@ app.get('/nclub/:name',function(req,res){
     
     var name=req.params.name;
     var d=dateFormat("yyyy-mm-dd");
-        
-        console.log(d);
 
-    db.event.find({club:name},function(err,docs){
+
+        
+
+    db.event.find({$and:[{club:name,date: { $gt:d} }]},function(err,docs){
         if(err)
         {
             console.log("err");
 
         }else
         {
-
-            for (var i = 0; i < docs.length; i++) {
-                if(docs[i].date>=d)
-                {
-                    res.send(docs[i]);
-                }
-            }           
-
+          
+                    res.send(docs);
+                
         }
 
 
     })
 
 });
-
 
 app.get('/dclub/:date',function(req,res){
     
