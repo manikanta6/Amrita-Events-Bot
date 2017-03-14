@@ -172,6 +172,8 @@ app.get('/insertid',function(req,res){
 });
 
 app.get('/publish',function(err,docs){
+    var h=0;
+    var g=0;
 
         var d=dateFormat("yyyy-mm-dd");
 
@@ -182,6 +184,10 @@ app.get('/publish',function(err,docs){
        var club=docs[i].club;
        var hall=docs[i].hall;
         var des=docs[i].descrip;
+
+        var n1=docs.length;
+        
+        g=g+1;
         
 
         db.subscribed.find({person:"identity"},function(err,docs2){
@@ -191,8 +197,16 @@ app.get('/publish',function(err,docs){
         }else
         { 
             var j;
+
+
+        var n2=docs2.length;
+        
+        h=h+1;
+
             for(j=0;j<docs2.length;j++)
 {
+
+
             
          if(docs2[j].cname==store)
          {
@@ -203,13 +217,17 @@ var id=docs2[j].id;
 
 
                       , function(error, response, body) {
-                        if(err)
+                        if(error)
                         {
                             console.log("err");
                         }
                         else{
                         
+                        if(g==n1&&h==n2)
+                        {
+
                           res.sendFile(__dirname +'/public/success2.html');
+                      }
                 }
                         });
 
