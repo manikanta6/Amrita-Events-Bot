@@ -181,10 +181,15 @@ app.get('/deleteid',function(req,res){
 
    db.subscribed.find({id:id},function(err,docs)
    {
-    if (docs.length!="0")
+    if (docs.length=="0")
 
     {
-       db.subscribed.delete({id:id},function(err,docs2)
+                res.send("unsuccess");
+
+     
+    }else
+    {
+          db.subscribed.delete({id:id},function(err,docs2)
     {
         if(err)
         {
@@ -194,11 +199,10 @@ app.get('/deleteid',function(req,res){
             res.send("success");
         }
 
+
     })
 
-    }else
-    {
-        res.send("unsuccess");
+        
     }
 
    });
