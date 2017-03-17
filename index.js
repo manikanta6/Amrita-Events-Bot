@@ -62,7 +62,7 @@ app.get('/event',function(req,res){
     //request("https:www.gupshup.io/developer/bot/botname/public?key=1325698540829049 & message="+ name +" is conducing in"+hall +"on"+date +"about"+des
     //request("https://www.gupshup.io/developer/bot/amritaevents/public?key=1260002900719641&message=am chastunav ra"
 
-        request("https://www.gupshup.io/developer/bot/amritaevents/public?key="+docs[i].id+"&message="+ name +" is conducing in"+hall +"on"+date +"about"+des
+        request("https://www.gupshup.io/developer/bot/amritaevents/public?key="+docs[i].id+"&message="+ name +" is conducing in "+hall +" on "+date +" about "+des
 
 
                       , function(error, response, body) {
@@ -159,8 +159,49 @@ app.get('/insertid',function(req,res){
 
     })
 
+    }else
+    {
+        res.send("unsuccess");
     }
    })
+
+   
+
+});
+
+
+app.get('/deleteid',function(req,res){
+
+
+
+    var person=req.query.identity;
+    var id=req.query.id;
+    
+
+
+   db.subscribed.find({id:id},function(err,docs)
+   {
+    if (docs.length=="0")
+
+    {
+       db.subscribed.delete({id:id},function(err,docs2)
+    {
+        if(err)
+        {
+            console.log("err");
+        }else
+        {
+            res.send("success");
+        }
+
+    })
+
+    }else
+    {
+        res.send("unsuccess");
+    }
+
+   });
 
    
 
