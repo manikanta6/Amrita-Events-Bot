@@ -113,12 +113,13 @@ app.get('/nclub/:name',function(req,res){
 
 });
 
-app.get('/dclub/:date',function(req,res){
+app.get('/dclub',function(req,res){
     
-    var date=req.params.date;
-      
+   
+         var d=dateFormat("yyyy-mm-dd");
 
-    db.event.find({date:date},function(err,docs){
+
+    db.event.find({date:d},function(err,docs){
         if(err)
         {
             console.log("err");
