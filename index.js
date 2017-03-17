@@ -189,7 +189,7 @@ app.get('/deleteid',function(req,res){
      
     }else
     {
-          db.subscribed.deleteMany({id:id},function(err,docs2)
+          db.subscribed.remove({id:id},function(err,docs2)
     {
         if(err)
         {
