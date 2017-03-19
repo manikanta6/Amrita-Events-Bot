@@ -218,7 +218,7 @@ app.get('/deleteid',function(req,res){
 
 });
 
-/*
+
 app.get('/publish',function(req,res){
     
 
@@ -282,74 +282,6 @@ var id=docs2[j].id;
     res.sendFile(__dirname +'/public/success2.html');
 
 })
-*/
-
-app.get('/publish',function(req,res){
-    
-
-        var d=dateFormat("yyyy-mm-dd");
-
-   db.event.find({date:d},function(err,docs){
-
-var n1=docs.length;
-    for (var i=0; i<n1; i++) {
-      var store=docs[i].cid;
-       var club=docs[i].club;
-       var hall=docs[i].hall;
-        var des=docs[i].descrip;
-
-       
-        
-        
-        
-
-        db.subscribed.find({cid:store},function(err,docs2){
-            if(err)
-        {
-            console.log(err);
-        }else
-        { 
-            var j;
-
-
-        var n2=docs2.length;
-        
-       
-
-            for(j=0;j<n2;j++)
-{
-
-
-            
-      
-var id=docs2[j].id;
-
-        request("https://www.gupshup.io/developer/bot/amritaevents/public?key="+id+"&message="+ club +" is conducing in "+hall +" today about"+des
-
-
-
-                      , function(error) {
-                        if(error)
-                        {
-                            console.log("err");
-                        }
-                   
-                        });
-
-              
-               
-            }
-     }
-        });
-    }
-        
-   });
-    res.sendFile(__dirname +'/public/success2.html');
-
-})
-
-
-
 
 
 app.listen(port,function(){
