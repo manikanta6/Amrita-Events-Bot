@@ -228,6 +228,7 @@ app.get('/publish',function(req,res){
 var n1=docs.length;
     for (var i=0; i<n1; i++) {
     var store=docs[i].cid;
+ var ob=parseInt(store);
 
      var name=docs[i].club;
      var event=docs[i].event;
@@ -237,7 +238,7 @@ var n1=docs.length;
      var des=docs[i].descrip;
         
 
-        db.subscribed.find({cid:store},function(err,docs2){
+        db.subscribed.find({cid:ob},function(err,docs2){
             if(err)
         {
             console.log(err);
