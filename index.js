@@ -277,9 +277,9 @@ var id=docs2[j].id;
      }
         });
     }
-        
+        res.sendFile(__dirname +'/public/success2.html');
    });
-    res.sendFile(__dirname +'/public/success2.html');
+    
 
 })
 
