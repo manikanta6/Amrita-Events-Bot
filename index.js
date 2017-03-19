@@ -32,11 +32,26 @@ app.get('/event',function(req,res){
     var name=req.query.club;
     var hall=req.query.hall;
     var date=req.query.date;
+    var time=req.query.time;
     var event=req.query.event;
+
     var des=req.query.des;
+     var cid;
+    if(name=="face")
+    {
+        cid=1;
+    }else if(name=="ecif"){
+        cid=2;
+    }else if(name=="vidyuth"){
+        cid=3;
+    }else if(name=="lekhani"){
+        cid=4;
+    }else{
+       cid=5;
+    }
 
 
-    db.event.insert({club:name,hall:hall,date:date,event:event,descrip:des},function(err,docs)
+    db.event.insert({cid:cid,club:name,hall:hall,date:date,time:time,event:event,descrip:des},function(err,docs)
     {
         if(err)
         {
@@ -46,23 +61,18 @@ app.get('/event',function(req,res){
             res.sendFile(__dirname +'/public/success.html');
         }
 
-        db.subscribed.find({person:"identity"},function(err,docs){
+        db.subscribed.find({cid:cid},function(err,docs2){
             if(err)
         {
             console.log(err);
         }else
         { 
             var i;
-            for(i=0;i<docs.length;i++)
+            for(i=0;i<docs2.length;i++)
             {
 
-            
-         if(docs[i].cname==name)
-         {
-    //request("https:www.gupshup.io/developer/bot/botname/public?key=1325698540829049 & message="+ name +" is conducing in"+hall +"on"+date +"about"+des
-    //request("https://www.gupshup.io/developer/bot/amritaevents/public?key=1260002900719641&message=am chastunav ra"
-
-        request("https://www.gupshup.io/developer/bot/amritaevents/public?key="+docs[i].id+"&message="+ name +" is conducing in "+hall +" on "+date +" about "+des
+             console.log(docs2[i].id);
+        request("https://www.gupshup.io/developer/bot/amritaevents/public?key="+docs2[i].id+"&message="+ name +" is conducting  an event on name"+ event +  ',in '+hall +" on "+date + " at " +time +" about "+des
 
 
                       , function(error, response, body) {
@@ -74,8 +84,7 @@ app.get('/event',function(req,res){
                           console.log(response);
                         });
 
-              }
-               
+                             
             }
         }
 
@@ -86,17 +95,15 @@ app.get('/event',function(req,res){
 
 });
 
-
-
-app.get('/nclub/:name',function(req,res){
+app.get('/nclub/:cid',function(req,res){
     
-    var name=req.params.name;
+    var cid1=req.params.cid;
     var d=dateFormat("yyyy-mm-dd");
 
+        var ob=parseInt(cid1);
 
-        
+    db.event.find({$and:[{cid:ob,date: { $gt:d} }]},function(err,docs){
 
-    db.event.find({$and:[{club:name,date: { $gt:d} }]},function(err,docs){
         if(err)
         {
             console.log("err");
@@ -138,17 +145,16 @@ app.get('/insertid',function(req,res){
 
 
 
-    var person=req.query.identity;
     var id=req.query.id;
-    var cname=req.query.cname;
+    var cid=req.query.cid;
 
 
-   db.subscribed.find({$and:[{id:id,cname:cname}]},function(err,docs)
+   db.subscribed.find({$and:[{id:id,cid:cid}]},function(err,docs)
    {
     if (docs.length=="0")
 
     {
-       db.subscribed.insert({person:person,id:id,cname:cname},function(err,docs2)
+       db.subscribed.insert({id:id,cid:cid},function(err,docs2)
     {
         if(err)
         {
@@ -221,17 +227,17 @@ app.get('/publish',function(req,res){
 
 var n1=docs.length;
     for (var i=0; i<n1; i++) {
-      var store=docs[i].club;
-       var club=docs[i].club;
-       var hall=docs[i].hall;
-        var des=docs[i].descrip;
+    var store=docs[i].cid;
 
-       
-        
-        
+     var name=docs[i].club;
+     var event=docs[i].event;
+     var date=docs[i].date;
+     var time=docs[i].time;
+     var hall=docs[i].hall;
+     var des=docs[i].descrip;
         
 
-        db.subscribed.find({$and:[{person:"identity",cname:store}]},function(err,docs2){
+        db.subscribed.find({cid:store},function(err,docs2){
             if(err)
         {
             console.log(err);
@@ -252,8 +258,7 @@ var n1=docs.length;
       
 var id=docs2[j].id;
 
-        request("https://www.gupshup.io/developer/bot/amritaevents/public?key="+id+"&message="+ club +" is conducing in "+hall +" today about"+des
-
+        request("https://www.gupshup.io/developer/bot/amritaevents/public?key="+id+"&message="+ name +" is conducting  an event on name"+ event +  ',in '+hall +" on "+date + " at " +time +" about "+des
 
 
                       , function(error) {
