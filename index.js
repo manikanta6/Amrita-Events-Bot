@@ -39,15 +39,15 @@ app.get('/event',function(req,res){
      var cid;
     if(name=="face")
     {
-        cid=1;
+        cid="1";
     }else if(name=="ecif"){
-        cid=2;
+        cid="2";
     }else if(name=="vidyuth"){
-        cid=3;
+        cid="3";
     }else if(name=="lekhani"){
-        cid=4;
+        cid="4";
     }else{
-       cid=5;
+       cid="5";
     }
 
 
@@ -98,11 +98,9 @@ app.get('/event',function(req,res){
 app.get('/nclub/:cid',function(req,res){
     
     var cid1=req.params.cid;
-    var d=dateFormat("yyyy-mm-dd");
+    var d=dateFormat("yyyy-mm-dd");       
 
-        var ob=parseInt(cid1);
-
-    db.event.find({$and:[{cid:ob,date: { $gt:d} }]},function(err,docs){
+    db.event.find({$and:[{cid:cid1,date: { $gte:d} }]},function(err,docs){
 
         if(err)
         {
@@ -148,9 +146,10 @@ app.get('/insertid',function(req,res){
     var id=req.query.id;
     var cid=req.query.cid;
 
-
+  
    db.subscribed.find({$and:[{id:id,cid:cid}]},function(err,docs)
    {
+console.log(docs.length);
     if (docs.length=="0")
 
     {
@@ -181,7 +180,6 @@ app.get('/deleteid',function(req,res){
 
 
 
-    var person=req.query.identity;
     var id=req.query.id;
     
 
@@ -227,9 +225,10 @@ app.get('/publish',function(req,res){
    db.event.find({date:d},function(err,docs){
 
 var n1=docs.length;
+
     for (var i=0; i<n1; i++) {
     var store=docs[i].cid;
- var ob=parseInt(store);
+
 
      var name=docs[i].club;
      var event=docs[i].event;
@@ -239,7 +238,7 @@ var n1=docs.length;
      var des=docs[i].descrip;
         
 
-        db.subscribed.find({cid:ob},function(err,docs2){
+        db.subscribed.find({cid:store},function(err,docs2){
             if(err)
         {
             console.log(err);
@@ -259,8 +258,8 @@ var n1=docs.length;
             
       
 var id=docs2[j].id;
-
-        request("https://www.gupshup.io/developer/bot/amritaevents/public?key="+id+"&message="+ name +" is conducting  an event on name"+ event +',in '+ hall +" on "+date + " at " +time +" about "+des
+     console.log(id);
+        request("https://www.gupshup.io/developer/bot/amritaevents/public?key="+id+"&message="+ name +" is conducting  an event on name"+ event +  ',in '+hall +" on "+date + " at " +time +" about "+des
 
 
                       , function(error) {
@@ -277,12 +276,12 @@ var id=docs2[j].id;
      }
         });
     }
-        res.sendFile(__dirname +'/public/success2.html');
+
+    res.sendFile(__dirname +'/public/success2.html');
+        
    });
-    
 
 })
-
 
 app.listen(port,function(){
     console.log("app is listening");
