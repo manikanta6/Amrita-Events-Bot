@@ -37,19 +37,56 @@ app.get('/event',function(req,res){
 
     var des=req.query.des;
      var cid;
-    if(name=="face")
+    if(name=="FACE")
     {
-        cid="1";
-    }else if(name=="ecif"){
         cid="2";
-    }else if(name=="vidyuth"){
+    }else if(name=="ECIF"){
         cid="3";
-    }else if(name=="lekhani"){
+    }else if(name=="Vidyuth"){
         cid="4";
-    }else{
-       cid="5";
+    }else if(name=="Ingenium"){
+        cid="5";
+    }else if(name=="Aavishkara"){
+        cid="6";
+    }else if(name=="Vyom"){
+        cid="7";
+    }else if(name=="Sankhya"){
+        cid="8";
+    }else if(name=="IEEE"){
+        cid="9";
+    }else if(name=="ACROM"){
+        cid="10";
     }
-
+    else if(name=="Lekhani"){
+        cid="12";
+    }else if(name=="The Squad"){
+        cid="13";
+    }else if(name=="Kala"){
+        cid="14";
+    }else if(name=="Narthana"){
+        cid="15";
+    }else if(name=="Raaga"){
+        cid="16";
+    }else if(name=="Smriti"){
+        cid="17";
+    }else if(name=="The Quiz Club"){
+        cid="18";
+    }else if(name=="The Humour Club"){
+        cid="19";
+    }else if(name=="Abhinaya"){
+        cid="20";
+    }else if(name=="SPICMACAY"){
+        cid="21";
+    }else if(name=="Chetana"){
+        cid="22";
+    }else if(name=="Maardhani"){
+        cid="23";
+    }else if(name=="Epic"){
+        cid="24";
+    
+    }else{
+       cid="50";
+    }
 
     db.event.insert({cid:cid,club:name,hall:hall,date:date,time:time,event:event,descrip:des},function(err,docs)
     {
@@ -66,13 +103,14 @@ app.get('/event',function(req,res){
         {
             console.log(err);
         }else
-        { 
+        { console.log(cid);
+            console.log(docs2[i].id);
             var i;
             for(i=0;i<docs2.length;i++)
             {
-
+            
              console.log(docs2[i].id);
-        request("https://www.gupshup.io/developer/bot/amritaevents/public?key="+docs2[i].id+"&message="+ name +" is conducting  an event on name"+ event +  ',in '+hall +" on "+date + " at " +time +" about "+des
+        request("https://www.gupshup.io/developer/bot/amritaevents/public?key="+docs2[i].id+"&message="+ name +" is conducting  an event on name "+ event +  ',in '+hall +" on "+date + " at " +time +" about "+des
 
 
                       , function(error, response, body) {
@@ -287,10 +325,3 @@ app.listen(port,function(){
     console.log("app is listening");
 
 });
-
-
-
-
-
-
-
