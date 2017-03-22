@@ -103,14 +103,12 @@ app.get('/event',function(req,res){
         {
             console.log(err);
         }else
-        { console.log(cid);
-            console.log(docs2[i].id);
+        {
             var i;
             for(i=0;i<docs2.length;i++)
             {
             
-             console.log(docs2[i].id);
-        request("https://www.gupshup.io/developer/bot/amritaevents/public?key="+docs2[i].id+"&message="+ name +" is conducting  an event on name "+ event +  ',in '+hall +" on "+date + " at " +time +" about "+des
+                  request("https://www.gupshup.io/developer/bot/amritaevents/public?key="+docs2[i].id+"&message="+ name +" is conducting  an event on name "+ event +  ',in '+hall +" on "+date + " at " +time +" about "+des
 
 
                       , function(error, response, body) {
