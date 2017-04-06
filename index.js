@@ -295,7 +295,7 @@ var n1=docs.length;
       
 var id=docs2[j].id;
      console.log(id);
-        request("https://www.gupshup.io/developer/bot/amritaevents/public?key="+id+"&message="+ name +" is conducting  an event on name"+ event +  ',in '+hall +" on "+date + " at " +time +" about "+des
+        request("https://www.gupshup.io/developer/bot/amritaevents/public?key="+id+"&message="+ name +" is conducting  an event on name "+ event +  ",today starts at " +time +' in '+hall +" about "+des
 
 
                       , function(error) {
