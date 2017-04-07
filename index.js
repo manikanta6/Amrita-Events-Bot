@@ -52,9 +52,9 @@ app.get('/event',function(req,res){
         cid="7";
     }else if(name=="Sankhya"){
         cid="8";
-    }else if(name=="IEEE"){
-        cid="9";
     }else if(name=="ACROM"){
+        cid="9";
+    }else if(name=="IEEE"){
         cid="10";
     }
     else if(name=="Lekhani"){
