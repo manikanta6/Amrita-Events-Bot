@@ -256,6 +256,7 @@ app.get('/deleteid',function(req,res){
 });
 
 
+
 app.get('/publish',function(req,res){
     
 
@@ -264,41 +265,54 @@ app.get('/publish',function(req,res){
    db.event.find({date:d},function(err,docs){
 
 var n1=docs.length;
+var i;
+  var name=[];
+     var event=[];
+     var date=[];
+     var time=[];
+     var hall=[];
+     var des=[];
 
-    for (var i=0; i<n1; i++) {
+var k=0;
+    for (i=0; i<n1; i++) {
+
+
     var store=docs[i].cid;
 
+ console.log(i);
 
-     var name=docs[i].club;
-     var event=docs[i].event;
-     var date=docs[i].date;
-     var time=docs[i].time;
-     var hall=docs[i].hall;
-     var des=docs[i].descrip;
-        
 
+
+
+      name[k]=docs[i].club;
+      event[k]=docs[i].event;
+      date[k]=docs[i].date;
+      time[k]=docs[i].time;
+      hall[k]=docs[i].hall;
+      des[k]=docs[i].descrip;
+         var m=0;
+console.log(store);
         db.subscribed.find({cid:store},function(err,docs2){
             if(err)
         {
             console.log(err);
         }else
         { 
-            var j;
-
-
+            var j;  
+           
         var n2=docs2.length;
-        
-       
 
             for(j=0;j<n2;j++)
 {
 
 
-            
-      
-var id=docs2[j].id;
-     console.log(id);
-        request("https://www.gupshup.io/developer/bot/amritaevents/public?key="+id+"&message="+ name +" is conducting  an event on name "+ event +  ",today starts at " +time +' in '+hall +" about "+des
+             
+   //  console.log(a[m]);
+     var id=docs2[j].id;
+    // console.log(id);
+
+     
+        request("https://www.gupshup.io/developer/bot/amritaevents/public?key="+id+"&message="+ name[m] +" is conducting  an event on name "+ event[m] +  ",today starts at " +time[m] +' in '+hall[m] +" about "+des[m]
 
 
                       , function(error) {
@@ -312,15 +326,21 @@ var id=docs2[j].id;
               
                
             }
+            m=m+1;
+            
      }
         });
+
+       k++;
+       
     }
 
-    res.sendFile(__dirname +'/public/success2.html');
-        
+      res.sendFile(__dirname +'/public/success2.html');
+       
    });
 
 })
+
 
 app.listen(port,function(){
     console.log("app is listening");
