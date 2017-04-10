@@ -306,10 +306,9 @@ console.log(store);
 {
 
 
-             
-   //  console.log(a[m]);
+   
      var id=docs2[j].id;
-    // console.log(id);
+
 
      
         request("https://www.gupshup.io/developer/bot/amritaevents/public?key="+id+"&message="+ name[m] +" is conducting  an event on name "+ event[m] +  ",today starts at " +time[m] +' in '+hall[m] +" about "+des[m]
@@ -335,12 +334,11 @@ console.log(store);
        
     }
 
-      res.sendFile(__dirname +'/public/success2.html');
+    res.sendFile(__dirname +'/public/success2.html');
        
    });
 
 })
-
 
 app.listen(port,function(){
     console.log("app is listening");
