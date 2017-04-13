@@ -73,21 +73,20 @@ app.get('/event',function(req,res){
         cid="18";
     }else if(name=="The Humour Club"){
         cid="19";
-    }else if(name=="GRINDING GEARS"){
-        cid="30";
-    }else if(name=="BRAINY BOTS"){
-        cid="31";
-    }else if(name=="NEED FOR SPEED"){
-        cid="32";
-    }else if(name=="PRISION BREAK"){
-        cid="33";
-    }else if(name=="FINAL DESTINATION"){
-        cid="34";
-    }else if(name=="AMRITAYAAN"){
-        cid="35";
-    }else if(name=="BUSINESS STREET"){
-        cid="36";
-    }else{
+    }else if(name=="Abhinaya"){
+        cid="20";
+    }else if(name=="SPICMACAY"){
+        cid="21";
+    }else if(name=="Chetana"){
+        cid="22";
+    }else if(name=="Maardhani"){
+        cid="23";
+    }else if(name=="Epic"){
+        cid="24";
+    }else if(name=="ACE"){
+        cid="25";
+    }
+    else{
        cid="50";
     }
 
@@ -266,7 +265,7 @@ app.get('/publish',function(req,res){
 
 var n1=docs.length;
 var i;
-  var name=[];
+     var name=[];
      var event=[];
      var date=[];
      var time=[];
